@@ -19,7 +19,7 @@
     "pullenv": "vercel env pull --environment=production",
     "setenv": "node ./.scripts/set-env.js",
     "setenv:bartio": "pnpm run setenv bartio",
-    "build:ipfs": "NEXT_PUBLIC_HOST=ipfs turbo build --filter=hub --filter=honey --filter='./packages/*' --concurrency=20",
+    "build:ipfs": "NEXT_PUBLIC_HOST=ipfs turbo build --filter=@bera/hub --filter=@bera/honey --filter='./packages/*' --concurrency=20",
     "build:hub": "turbo build --filter=@bera/hub --filter='./packages/*' --concurrency=20",
     "build:honey": "turbo build --filter=@bera/honey --filter='./packages/*' --concurrency=20",
     "build:storybook": "turbo build --filter=@bera/storybook --filter='./packages/*' --concurrency=20  --filter='!@berachain-foundation/berancer-sdk'",
