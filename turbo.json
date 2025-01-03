@@ -1,7 +1,7 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": [".env", "./secrets/**"],
-  "tasks": {
+  "pipeline": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": [
@@ -9,16 +9,31 @@
         ".next/**",
         "!.next/cache/**",
         "storybook-static/**"
-      ]
+      ],
+      "cache": true
     },
     "start": {
+      "dependsOn": ["build"],
       "persistent": true,
       "cache": false
     },
-    "lint": {},
-    "lint:fix": {},
-    "storybook": {},
-    "storybook:build": {},
+    "lint": {
+      "outputs": [],
+      "cache": true
+    },
+    "lint:fix": {
+      "outputs": [],
+      "cache": true
+    },
+    "storybook": {
+      "dependsOn": ["^build"],
+      "cache": true
+    },
+    "storybook:build": {
+      "dependsOn": ["^build"],
+      "outputs": ["storybook-static/**"],
+      "cache": true
+    },
     "clean": {
       "cache": false
     },
@@ -29,8 +44,8 @@
     },
     "check-types": {
       "dependsOn": ["^build"],
-      "cache": false,
-      "outputs": ["storybook-static/**"]
+      "outputs": ["storybook-static/**"],
+      "cache": true
     }
   },
   "globalEnv": ["CI", "NODE_ENV", "SKIP_ENV_VALIDATION", "VERCEL", "VERCEL_ENV"]
